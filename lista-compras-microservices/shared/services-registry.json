@@ -1,0 +1,51 @@
+{
+  "item-service": {
+    "url": "http://localhost:3003",
+    "version": "1.0.0",
+    "database": "JSON-NoSQL",
+    "endpoints": [
+      "/health",
+      "/items",
+      "/items/:id",
+      "/categories",
+      "/search"
+    ],
+    "registeredAt": 1758492120714,
+    "lastHealthCheck": 1758497886556,
+    "healthy": true,
+    "pid": 20824
+  },
+  "user-service": {
+    "url": "http://localhost:3001",
+    "version": "1.0.0",
+    "database": "JSON-NoSQL",
+    "endpoints": [
+      "/health",
+      "/auth/register",
+      "/auth/login",
+      "/users",
+      "/search"
+    ],
+    "registeredAt": 1758492094582,
+    "lastHealthCheck": 1758497886603,
+    "healthy": true,
+    "pid": 16572
+  },
+  "list-service": {
+    "url": "http://localhost:3002",
+    "version": "1.0.0",
+    "database": "JSON-NoSQL",
+    "endpoints": [
+      "/health",
+      "/lists",
+      "/lists/:id",
+      "/lists/:id/items",
+      "/lists/:id/items/:itemId",
+      "/lists/:id/summary"
+    ],
+    "registeredAt": 1758492136593,
+    "lastHealthCheck": 1758497898114,
+    "healthy": true,
+    "pid": 15620
+  }
+}

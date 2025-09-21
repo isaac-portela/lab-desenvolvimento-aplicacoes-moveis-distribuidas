@@ -1,0 +1,172 @@
+[
+  {
+    "id": "fb2726cb-1998-4e95-9639-a4b2fe40b7e8",
+    "userId": "31c11b3d-9b62-479c-b008-1c79bb12596d",
+    "name": "Lista Demo 1758493208847",
+    "description": "Criada via client-demo",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "6f80407c-8978-4b06-acd5-7404ac5fd445",
+        "itemName": "Croissant 80g",
+        "quantity": 2,
+        "unit": "un",
+        "estimatedPrice": 5.5,
+        "purchased": false,
+        "notes": "Teste via demo",
+        "addedAt": "2025-09-21T22:20:11.084Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 1,
+      "purchasedItems": 0,
+      "estimatedTotal": 11
+    },
+    "createdAt": "2025-09-21T22:20:10.738Z",
+    "updatedAt": "2025-09-21T22:20:11.394Z"
+  },
+  {
+    "id": "88f9da5f-9ede-48eb-983c-796742f54773",
+    "userId": "7734a933-820e-4b86-82b6-8d2ce185417c",
+    "name": "Lista Demo 1758493250632",
+    "description": "Criada via client-demo",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "6f80407c-8978-4b06-acd5-7404ac5fd445",
+        "itemName": "Croissant 80g",
+        "quantity": 2,
+        "unit": "un",
+        "estimatedPrice": 5.5,
+        "purchased": false,
+        "notes": "Teste via demo",
+        "addedAt": "2025-09-21T22:20:52.810Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 1,
+      "purchasedItems": 0,
+      "estimatedTotal": 11
+    },
+    "createdAt": "2025-09-21T22:20:52.488Z",
+    "updatedAt": "2025-09-21T22:20:53.134Z"
+  },
+  {
+    "id": "03c5c7c3-def3-4fed-9531-83531aabb763",
+    "userId": "973ad847-02ba-49e9-9545-7d56a852a624",
+    "name": "Lista Demo 1758496173211",
+    "description": "Criada via client-demo",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "6f80407c-8978-4b06-acd5-7404ac5fd445",
+        "itemName": "Croissant 80g",
+        "quantity": 2,
+        "unit": "un",
+        "estimatedPrice": 5.5,
+        "purchased": false,
+        "notes": "Teste via demo",
+        "addedAt": "2025-09-21T23:09:35.449Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 1,
+      "purchasedItems": 0,
+      "estimatedTotal": 11
+    },
+    "createdAt": "2025-09-21T23:09:35.107Z",
+    "updatedAt": "2025-09-21T23:09:35.782Z"
+  },
+  {
+    "id": "457068e8-2ad4-403b-8b2f-ded166d97e17",
+    "userId": "6554a08f-2f1c-47a6-a81f-67fcf2631d5c",
+    "name": "Lista Demo 1758496566414",
+    "description": "Criada via client-demo",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "6f80407c-8978-4b06-acd5-7404ac5fd445",
+        "itemName": "Croissant 80g",
+        "quantity": 2,
+        "unit": "un",
+        "estimatedPrice": 5.5,
+        "purchased": true,
+        "notes": "Promoção",
+        "addedAt": "2025-09-21T23:16:07.880Z"
+      },
+      {
+        "itemId": "69256858-9d2c-4e5e-af45-160b9fd27be1",
+        "itemName": "Bolo Inglês 300g",
+        "quantity": 2,
+        "unit": "un",
+        "estimatedPrice": 12.5,
+        "purchased": true,
+        "notes": "Estoque baixo",
+        "addedAt": "2025-09-21T23:16:08.051Z"
+      },
+      {
+        "itemId": "fb02f0a6-4a0b-48f1-8771-2359c4932d6d",
+        "itemName": "Pão Francês 1kg",
+        "quantity": 1,
+        "unit": "kg",
+        "estimatedPrice": 18,
+        "purchased": false,
+        "notes": "Pedido avulso",
+        "addedAt": "2025-09-21T23:16:08.221Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 3,
+      "purchasedItems": 2,
+      "estimatedTotal": 54
+    },
+    "createdAt": "2025-09-21T23:16:07.660Z",
+    "updatedAt": "2025-09-21T23:16:08.731Z"
+  },
+  {
+    "id": "97100933-9b5d-4368-95dc-40c32dac4b42",
+    "userId": "25ad73a0-8fb5-4808-9da5-71f71f395340",
+    "name": "Lista Demo 1758496937413",
+    "description": "Criada via client-demo",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "6f80407c-8978-4b06-acd5-7404ac5fd445",
+        "itemName": "Croissant 80g",
+        "quantity": 2,
+        "unit": "un",
+        "estimatedPrice": 5.5,
+        "purchased": true,
+        "notes": "Promoção",
+        "addedAt": "2025-09-21T23:22:18.923Z"
+      },
+      {
+        "itemId": "69256858-9d2c-4e5e-af45-160b9fd27be1",
+        "itemName": "Bolo Inglês 300g",
+        "quantity": 2,
+        "unit": "un",
+        "estimatedPrice": 12.5,
+        "purchased": true,
+        "notes": "Estoque baixo",
+        "addedAt": "2025-09-21T23:22:19.091Z"
+      },
+      {
+        "itemId": "fb02f0a6-4a0b-48f1-8771-2359c4932d6d",
+        "itemName": "Pão Francês 1kg",
+        "quantity": 1,
+        "unit": "kg",
+        "estimatedPrice": 18,
+        "purchased": false,
+        "notes": "Pedido avulso",
+        "addedAt": "2025-09-21T23:22:19.262Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 3,
+      "purchasedItems": 2,
+      "estimatedTotal": 54
+    },
+    "createdAt": "2025-09-21T23:22:18.702Z",
+    "updatedAt": "2025-09-21T23:22:19.768Z"
+  }
+]
