@@ -11,8 +11,8 @@
       "/search"
     ],
     "registeredAt": 1758492120714,
-    "lastHealthCheck": 1758497886556,
-    "healthy": true,
+    "lastHealthCheck": 1758499026874,
+    "healthy": false,
     "pid": 20824
   },
   "user-service": {
@@ -27,8 +27,8 @@
       "/search"
     ],
     "registeredAt": 1758492094582,
-    "lastHealthCheck": 1758497886603,
-    "healthy": true,
+    "lastHealthCheck": 1758499026876,
+    "healthy": false,
     "pid": 16572
   },
   "list-service": {
@@ -44,7 +44,7 @@
       "/lists/:id/summary"
     ],
     "registeredAt": 1758492136593,
-    "lastHealthCheck": 1758497898114,
+    "lastHealthCheck": 1758499026878,
     "healthy": true,
     "pid": 15620
   }
