@@ -18,12 +18,56 @@ class DatabaseService {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
 
-    return await openDatabase(
+    final db = await openDatabase(
       path,
-      version: 2,
+      version: 4,
       onCreate: _createDB,
       onUpgrade: _upgradeDB,
     );
+    
+    // Garantir que todas as colunas existam (migração de segurança)
+    await _ensureColumns(db);
+    
+    return db;
+  }
+
+  // Método auxiliar para garantir que todas as colunas existam
+  Future<void> _ensureColumns(Database db) async {
+    try {
+      // Verificar colunas existentes
+      final columns = await db.rawQuery('PRAGMA table_info(tasks)');
+      final columnNames = columns.map((col) => col['name'] as String).toSet();
+      
+      // Lista de colunas necessárias (sem PRIMARY KEY ou NOT NULL para ALTER TABLE)
+      final requiredColumns = {
+        'dueDate': 'TEXT',
+        'reminderTime': 'TEXT',
+        'photoPath': 'TEXT',
+        'completedAt': 'TEXT',
+        'completedBy': 'TEXT',
+        'latitude': 'REAL',
+        'longitude': 'REAL',
+        'locationName': 'TEXT',
+      };
+      
+      // Adicionar colunas faltantes (ignorar id pois é PRIMARY KEY)
+      for (final entry in requiredColumns.entries) {
+        if (!columnNames.contains(entry.key)) {
+          print('➕ Adicionando coluna faltante: ${entry.key}');
+          try {
+            await db.execute(
+              'ALTER TABLE tasks ADD COLUMN ${entry.key} ${entry.value}'
+            );
+            print('✅ Coluna ${entry.key} adicionada com sucesso');
+          } catch (e) {
+            print('⚠️ Erro ao adicionar coluna ${entry.key}: $e');
+          }
+        }
+      }
+    } catch (e) {
+      print('⚠️ Erro ao verificar colunas: $e');
+      // Não relançar para não quebrar a inicialização
+    }
   }
 
   Future<void> _createDB(Database db, int version) async {
@@ -31,21 +75,53 @@ class DatabaseService {
       CREATE TABLE tasks (
         id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
-        description TEXT,
+        description TEXT NOT NULL,
         completed INTEGER NOT NULL,
         priority TEXT NOT NULL,
         createdAt TEXT NOT NULL,
         dueDate TEXT,
-        reminderTime TEXT
+        reminderTime TEXT,
+        photoPath TEXT,
+        completedAt TEXT,
+        completedBy TEXT,
+        latitude REAL,
+        longitude REAL,
+        locationName TEXT
       )
     ''');
   }
 
   Future<void> _upgradeDB(Database db, int oldVersion, int newVersion) async {
-    if (oldVersion < 2) {
-      // Add dueDate and reminderTime columns
-      await db.execute('ALTER TABLE tasks ADD COLUMN dueDate TEXT');
-      await db.execute('ALTER TABLE tasks ADD COLUMN reminderTime TEXT');
+    print('🔄 Atualizando banco de dados da versão $oldVersion para $newVersion');
+    
+    try {
+      // Versão 1 -> 2: Adicionar dueDate e reminderTime
+      if (oldVersion < 2) {
+        await db.execute('ALTER TABLE tasks ADD COLUMN dueDate TEXT');
+        await db.execute('ALTER TABLE tasks ADD COLUMN reminderTime TEXT');
+        print('✅ Colunas dueDate e reminderTime adicionadas');
+      }
+      
+      // Versão 2 -> 3: Adicionar photoPath
+      if (oldVersion < 3) {
+        await db.execute('ALTER TABLE tasks ADD COLUMN photoPath TEXT');
+        print('✅ Coluna photoPath adicionada');
+      }
+      
+      // Versão 3 -> 4: Adicionar campos de GPS e completude
+      if (oldVersion < 4) {
+        await db.execute('ALTER TABLE tasks ADD COLUMN completedAt TEXT');
+        await db.execute('ALTER TABLE tasks ADD COLUMN completedBy TEXT');
+        await db.execute('ALTER TABLE tasks ADD COLUMN latitude REAL');
+        await db.execute('ALTER TABLE tasks ADD COLUMN longitude REAL');
+        await db.execute('ALTER TABLE tasks ADD COLUMN locationName TEXT');
+        print('✅ Colunas de GPS e completude adicionadas');
+      }
+      
+      print('✅ Banco de dados atualizado com sucesso!');
+    } catch (e) {
+      print('❌ Erro ao atualizar banco de dados: $e');
+      rethrow;
     }
   }
 
@@ -117,5 +193,26 @@ class DatabaseService {
       where: 'id = ?',
       whereArgs: [id],
     );
+  }
+
+  // Método especial: buscar tarefas por proximidade
+  Future<List<Task>> getTasksNearLocation({
+    required double latitude,
+    required double longitude,
+    double radiusInMeters = 1000,
+  }) async {
+    final allTasks = await readAll();
+    return allTasks.where((task) {
+      if (!task.hasLocation) return false;
+      // Cálculo de distância usando fórmula de Haversine (simplificada)
+      final latDiff = (task.latitude! - latitude).abs();
+      final lonDiff = (task.longitude! - longitude).abs();
+      final distance = ((latDiff * 111000) + (lonDiff * 111000)) / 2;
+      return distance <= radiusInMeters;
+    }).toList();
+  }
+  Future close() async {
+    final db = await instance.database;
+    db.close();
   }
 }

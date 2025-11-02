@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:task_manager/services/camera_service.dart';
 import 'screens/task_list_screen.dart';
 import 'services/notification_service.dart';
 
@@ -8,6 +9,8 @@ void main() async {
   
   // Initialize notification service
   await NotificationService.instance.initialize();
+
+  await CameraService.instance.initialize();
   
   runApp(const MyApp());
 }
@@ -20,34 +23,28 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Task Manager Pro',
       debugShowCheckedModeBanner: false,
+      // Localizações necessárias para DatePicker e outros widgets
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('pt', 'BR'),
-        Locale('en', 'US'),
+        Locale('en', 'US'), // Inglês
+        Locale('pt', 'BR'), // Português do Brasil
       ],
-      locale: const Locale('pt', 'BR'),
+      locale: const Locale('pt', 'BR'), // Locale padrão
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
           brightness: Brightness.light,
         ),
         useMaterial3: true,
-        cardTheme: const CardThemeData(  // ← CardThemeData ao invés de CardTheme
+        cardTheme: CardThemeData(
           elevation: 2,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12)),
+            borderRadius: BorderRadius.circular(12),
           ),
-        ),
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
-          filled: true,
-          fillColor: Color(0xFFF5F5F5), // Colors.grey.shade50
         ),
       ),
       home: const TaskListScreen(),
